@@ -11,8 +11,14 @@
       class="breadcrumb-container"
     />
     <div class="right-menu">
-      <template>
-        <lang-select class="right-menu-item hover-effect" />
+      <template v-if="device!=='mobile'">
+        <el-tooltip
+          :content="$t('navbar.size')"
+          effect="dark"
+          placement="bottom"
+        >
+        </el-tooltip>
+        <lang-select v-show="showI8N" class="right-menu-item hover-effect" />
       </template>
       <el-dropdown
         class="avatar-container right-menu-item hover-effect"
@@ -51,6 +57,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator'
 import { AppModule } from '@/store/modules/app'
+import { SettingsModule } from '@/store/modules/settings'
 import { UserModule } from '@/store/modules/user'
 import Breadcrumb from '@/components/Breadcrumb/index.vue'
 import Hamburger from '@/components/Hamburger/index.vue'
@@ -67,6 +74,10 @@ import LangSelect from '@/components/LangSelect/index.vue'
 export default class extends Vue {
   get sidebar() {
     return AppModule.sidebar
+  }
+
+  get showI8N() {
+    return SettingsModule.showI18N
   }
 
   get device() {

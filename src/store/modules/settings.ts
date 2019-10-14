@@ -18,6 +18,7 @@ class Settings extends VuexModule implements ISettingsState {
   public fixedHeader = defaultSettings.fixedHeader
   public showSettings = defaultSettings.showSettings
   public showTagsView = defaultSettings.showTagsView
+  public showI18N = defaultSettings.showI18N
   public showSidebarLogo = defaultSettings.showSidebarLogo
   public sidebarTextTheme = defaultSettings.sidebarTextTheme
 

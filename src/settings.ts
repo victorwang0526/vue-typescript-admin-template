@@ -2,6 +2,7 @@ interface ISettings {
   title: string // Overrides the default title
   showSettings: boolean // Controls settings panel display
   showTagsView: boolean // Controls tagsview display
+  showI18N: boolean // Controls i18n display
   showSidebarLogo: boolean // Controls siderbar logo display
   fixedHeader: boolean // If true, will fix the header component
   errorLog: string[] // The env to enable the errorlog component, default 'production' only
@@ -15,8 +16,9 @@ const settings: ISettings = {
   title: 'Vue Typescript Admin',
   showSettings: true,
   showTagsView: true,
+  showI18N: false,
   fixedHeader: false,
-  showSidebarLogo: false,
+  showSidebarLogo: true,
   errorLog: ['production'],
   sidebarTextTheme: true,
   devServerPort: 8080,
