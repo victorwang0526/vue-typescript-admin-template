@@ -139,6 +139,7 @@ import { Form } from 'element-ui'
 })
 export default class extends Vue {
   @Prop({ default: false }) private isEdit!: boolean
+  @Prop() private vo: any
 
   private validateRequire = (rule: any, value: string, callback: Function) => {
     if (value === '') {
@@ -207,7 +208,7 @@ export default class extends Vue {
 
   created() {
     if (this.isEdit) {
-      const id = this.$route.params && this.$route.params.id
+      const id = this.vo.id
       this.fetchData(parseInt(id))
     } else {
       this.postForm = Object.assign({}, defaultArticleData)

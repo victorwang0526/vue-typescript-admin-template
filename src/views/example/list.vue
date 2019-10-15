@@ -10,7 +10,7 @@
         :value="item.value"></el-option>
       </el-select>
       <el-button type="primary">查询</el-button>
-      <el-button type="success" @click="dialogFormVisible = true">新增</el-button>
+      <el-button type="success" @click="openNew">新增</el-button>
     </div>
 
     <el-table
@@ -96,16 +96,24 @@
         label="Actions"
         width="120"
       >
-        <template slot-scope="scope">
-          <router-link :to="'/example/edit/'+scope.row.id">
-            <el-button
-              type="primary"
-              size="small"
-              icon="el-icon-edit"
-            >
-              Edit
-            </el-button>
-          </router-link>
+        <template slot-scope="{row}">
+          <el-button
+            type="primary"
+            size="small"
+            icon="el-icon-edit"
+            @click="openEdit(row)"
+          >
+            Edit
+          </el-button>
+<!--          <router-link :to="'/example/edit/'+scope.row.id">-->
+<!--            <el-button-->
+<!--              type="primary"-->
+<!--              size="small"-->
+<!--              icon="el-icon-edit"-->
+<!--            >-->
+<!--              Edit-->
+<!--            </el-button>-->
+<!--          </router-link>-->
         </template>
       </el-table-column>
     </el-table>
@@ -118,8 +126,8 @@
       @pagination="getList"
     />
 
-    <el-dialog title="新建" :visible.sync="dialogFormVisible">
-      <article-detail :is-edit="false" @doneEvent="dialogFormVisible = false, getList()"/>
+    <el-dialog :title="isEdit ? '编辑' : '新建'" :visible.sync="dialogFormVisible">
+      <article-detail :is-edit="isEdit" :vo="vo" @doneEvent="dialogFormVisible = false, getList()"/>
     </el-dialog>
   </div>
 </template>
@@ -169,6 +177,8 @@ export default class extends Vue {
   inputValue = '';
   dialogFormVisible = false;
   formLabelWidth = '120px';
+  vo: any
+  isEdit = false
   form = {
     name: '',
     region: '',
@@ -182,6 +192,21 @@ export default class extends Vue {
 
   created() {
     this.getList()
+  }
+
+  openEdit(row: any) {
+    this.isEdit = true
+    this.vo = row
+    this.dialogFormVisible = true
+  }
+
+  openNew() {
+    this.isEdit = false
+    this.dialogFormVisible = true
+  }
+
+  getDialogTitle() {
+    return this.isEdit ? '编辑' : '新建'
   }
 
   submit() {
