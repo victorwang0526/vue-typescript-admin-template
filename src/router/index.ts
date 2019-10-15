@@ -100,30 +100,39 @@ export const asyncRoutes: RouteConfig[] = [
   {
     path: '/example',
     component: Layout,
-    redirect: '/example/tree',
+    redirect: '/example/list',
     meta: {
-      title: 'Example',
-      icon: 'example',
-      roles: ['admin', 'editor'], // you can set roles in root nav
-      alwaysShow: true // will always show the root menu
+      title: 'example',
+      icon: 'example'
     },
     children: [
       {
-        path: 'tree',
-        component: () => import(/* webpackChunkName: "tree" */ '@/views/tree/index.vue'),
+        path: 'create',
+        component: () => import(/* webpackChunkName: "example-create" */ '@/views/example/create.vue'),
+        name: 'CreateArticle',
         meta: {
-          title: 'Tree',
-          icon: 'tree',
-          roles: ['admin'] // or you can only set roles in sub nav
+          title: 'createArticle',
+          icon: 'edit'
         }
       },
       {
-        path: 'table',
-        component: () => import(/* webpackChunkName: "table" */ '@/views/table/index.vue'),
+        path: 'edit/:id(\\d+)',
+        component: () => import(/* webpackChunkName: "example-edit" */ '@/views/example/edit.vue'),
+        name: 'EditArticle',
         meta: {
-          title: 'Table',
-          icon: 'table'
-          // if do not set roles, means: this page does not require permission
+          title: 'editArticle',
+          noCache: true,
+          activeMenu: '/example/list',
+          hidden: true
+        }
+      },
+      {
+        path: 'list',
+        component: () => import(/* webpackChunkName: "example-list" */ '@/views/example/list.vue'),
+        name: 'ArticleList',
+        meta: {
+          title: 'articleList',
+          icon: 'list'
         }
       }
     ]
