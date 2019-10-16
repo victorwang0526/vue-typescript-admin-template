@@ -253,7 +253,7 @@ export default class extends Vue {
   }
 
   private setPageTitle(title: string) {
-    document.title = `${title} - ${this.postForm.id}`
+    // document.title = `${title} - ${this.postForm.id}`
   }
 
   private submitForm() {
