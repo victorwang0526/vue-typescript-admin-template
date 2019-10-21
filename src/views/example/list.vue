@@ -82,12 +82,7 @@
         label="Title"
       >
         <template slot-scope="{row}">
-          <router-link
-            :to="'/example/edit/'+row.id"
-            class="link-type"
-          >
-            <span>{{ row.title }}</span>
-          </router-link>
+          <span>{{ row.title }}</span>
         </template>
       </el-table-column>
 
@@ -126,8 +121,8 @@
       @pagination="getList"
     />
 
-    <el-dialog :title="isEdit ? '编辑' : '新建'" :visible.sync="dialogFormVisible">
-      <article-detail :is-edit="isEdit" :vo="vo" @doneEvent="dialogFormVisible = false, getList()"/>
+    <el-dialog :title="isEdit ? '编辑' : '新建'" v-if="dialogFormVisible">
+      <article-detail :is-edit="isEdit" :vo="vo" @doneEvent="dialogFormVisible = false, getList(), vo = null"/>
     </el-dialog>
   </div>
 </template>
@@ -177,7 +172,7 @@ export default class extends Vue {
   inputValue = '';
   dialogFormVisible = false;
   formLabelWidth = '120px';
-  vo: any
+  vo: any = null;
   isEdit = false
   form = {
     name: '',
@@ -202,6 +197,7 @@ export default class extends Vue {
 
   openNew() {
     this.isEdit = false
+    this.vo = null
     this.dialogFormVisible = true
   }
 
