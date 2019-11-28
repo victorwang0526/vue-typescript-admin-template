@@ -10,7 +10,7 @@
     >
       <div class="title-container">
         <h3 class="title">
-          Login Form
+          登录
         </h3>
       </div>
 
@@ -24,7 +24,7 @@
           name="username"
           type="text"
           autocomplete="on"
-          placeholder="username"
+          placeholder="用户名"
         />
       </el-form-item>
 
@@ -37,7 +37,7 @@
           ref="password"
           v-model="loginForm.password"
           :type="passwordType"
-          placeholder="password"
+          placeholder="密码"
           name="password"
           autocomplete="on"
           @keyup.enter.native="handleLogin"
@@ -56,7 +56,7 @@
         style="width:100%; margin-bottom:30px;"
         @click.native.prevent="handleLogin"
       >
-        Sign in
+        登录
       </el-button>
 
       <div style="position:relative">
@@ -83,14 +83,14 @@ import { isValidUsername } from '@/utils/validate'
 export default class extends Vue {
   private validateUsername = (rule: any, value: string, callback: Function) => {
     if (!isValidUsername(value)) {
-      callback(new Error('Please enter the correct user name'))
+      callback(new Error('请输入用户名'))
     } else {
       callback()
     }
   }
   private validatePassword = (rule: any, value: string, callback: Function) => {
     if (value.length < 6) {
-      callback(new Error('The password can not be less than 6 digits'))
+      callback(new Error('请输入密码'))
     } else {
       callback()
     }
